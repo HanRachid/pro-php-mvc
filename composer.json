@@ -1,0 +1,22 @@
+{
+    "name": "rachidodin/pro-php-mvc",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app",
+            "Framework\\": "framework"
+        }
+    },
+    "scripts": {
+        "serve": "php -S 127.0.0.1:8000 -t public"
+        },
+    "authors": [
+        {
+            "name": "Rachid",
+            "email": "handaouirachid@gmail.com"
+        }
+    ],
+    "config": {
+        "process-timeout": 0
+        },
+    "require": {}
+}
