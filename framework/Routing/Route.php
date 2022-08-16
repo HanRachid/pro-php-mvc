@@ -9,7 +9,11 @@ class Route
     protected $handler;
     protected array $parameters = [];
     protected ?string $name = null;
-
+    public static function endsWith($haystack, $needle)
+    {
+        $length = strlen($needle);
+        return $length > 0 ? substr($haystack, -$length) === $needle : true;
+    }
     public function __construct(string $method, string $path, callable $handler)
     {
         $this->method = $method;
@@ -17,12 +21,12 @@ class Route
         $this->handler = $handler;
     }
 
-    public function method(string $method): string
+    public function method(): string
     {
         return $this->method;
     }
 
-    public function path(string $path): string
+    public function path(): string
     {
         return $this->path;
     }
@@ -32,7 +36,7 @@ class Route
         return $this->parameters;
     }
 
-    public function name(string $name = null): string
+    public function name(string $name = null)
     {
         if ($name) {
             $this->name = $name;
@@ -58,16 +62,16 @@ class Route
         $pattern = preg_replace_callback('#{([^}]+)}/#', function (array $found) use (&$parameterNames) {
             array_push($parameterNames, rtrim($found[1], '?'));
 
-            if (str_ends_with($found[1], '?')) {
-                return '([^/]*)(?:/?)';    
+            if (static::endsWith($found[1], '?')) {
+                return '([^/]*)(?:/?)';
             }
 
             return '([^/]+)/';
         }, $pattern);
 
         if (
-            !str_contains($pattern, '+')
-            && !str_contains($pattern, '*')
+            !strpos($pattern, '+')
+            && !strpos($pattern, '*')
         ) {
             return false;
         }

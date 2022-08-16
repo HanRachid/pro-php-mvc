@@ -36,16 +36,15 @@ class Router
 
             try {
                 return $matching->dispatch();
-            }
-            catch (Throwable $e) {
-                return $this->dispatchError();
+            } catch (Throwable $e) {
+                return $this->dispatchError($e);
             }
         }
-        
+
         if (in_array($requestPath, $paths)) {
             return $this->dispatchNotAllowed();
         }
-        
+
         return $this->dispatchNotFound();
     }
 
@@ -78,19 +77,19 @@ class Router
 
     public function dispatchNotAllowed()
     {
-        $this->errorHandlers[400] ??= fn() => 'not allowed';
+        $this->errorHandlers[400] ??= fn () => 'not allowed';
         return $this->errorHandlers[400]();
     }
 
     public function dispatchNotFound()
     {
-        $this->errorHandlers[404] ??= fn() => 'not found';
+        $this->errorHandlers[404] ??= fn () => 'not found';
         return $this->errorHandlers[404]();
     }
 
-    public function dispatchError()
+    public function dispatchError($e)
     {
-        $this->errorHandlers[500] ??= fn() => 'server error';
+        $this->errorHandlers[500] ??= fn () => 'server error  :'.$e;
         return $this->errorHandlers[500]();
     }
 
