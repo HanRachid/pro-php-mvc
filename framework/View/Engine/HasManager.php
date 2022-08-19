@@ -8,7 +8,7 @@ trait HasManager
 {
     protected Manager $manager;
 
-    public function setManager(Manager $manager): static
+    public function setManager(Manager $manager)
     {
         $this->manager = $manager;
         return $this;

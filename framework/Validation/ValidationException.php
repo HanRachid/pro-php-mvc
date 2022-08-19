@@ -8,7 +8,7 @@ class ValidationException extends InvalidArgumentException
 {
     protected array $errors = [];
 
-    public function setErrors(array $errors): static
+    public function setErrors(array $errors)
     {
         $this->errors = $errors;
         return $this;

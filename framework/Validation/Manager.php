@@ -9,7 +9,7 @@ class Manager
 {
     protected array $rules = [];
 
-    public function addRule(string $alias, Rule $rule): static
+    public function addRule(string $alias, Rule $rule)
     {
         $this->rules[$alias] = $rule;
         return $this;
@@ -28,7 +28,7 @@ class Manager
                     [$name, $params] = explode(':', $rule);
                     $params = explode(',', $params);
                 }
-                
+
                 $processor = $this->rules[$name];
 
                 if (!$processor->validate($data, $field, $params)) {

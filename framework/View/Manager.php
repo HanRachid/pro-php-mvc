@@ -13,13 +13,13 @@ class Manager
     protected array $engines = [];
     protected array $macros = [];
 
-    public function addPath(string $path): static
+    public function addPath(string $path)
     {
         array_push($this->paths, $path);
         return $this;
     }
 
-    public function addEngine(string $extension, Engine $engine): static
+    public function addEngine(string $extension, Engine $engine)
     {
         $this->engines[$extension] = $engine;
         $this->engines[$extension]->setManager($this);
@@ -41,7 +41,7 @@ class Manager
         throw new Exception("Could not resolve '{$template}'");
     }
 
-    public function addMacro(string $name, Closure $closure): static
+    public function addMacro(string $name, Closure $closure)
     {
         $this->macros[$name] = $closure;
         return $this;

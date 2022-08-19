@@ -4,6 +4,7 @@ namespace Framework\View\Engine;
 
 use Framework\View\Engine\HasManager;
 use Framework\View\View;
+
 use function view;
 
 class PhpEngine implements Engine
@@ -33,7 +34,7 @@ class PhpEngine implements Engine
         return $contents;
     }
 
-    protected function extends(string $template): static
+    protected function extends(string $template)
     {
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
         $this->layouts[realpath($backtrace[0]['file'])] = $template;
